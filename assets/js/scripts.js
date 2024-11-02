@@ -13,6 +13,11 @@ function handleScrollAnimations() {
 }
 
 window.addEventListener('scroll', handleScrollAnimations);
+// Toggle Solutions for Earth and Mars
+function toggleSolutions(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.style.display = section.style.display === 'none' ? 'block' : 'none';
+}
 
 // Initialize Map
 async function initMap() {
