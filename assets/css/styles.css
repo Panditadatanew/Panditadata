@@ -181,6 +181,32 @@ footer {
     font-size: 1.3em;
     margin-top: 0.5em;
 }
+/* Planet Sections */
+.planets-container {
+    display: flex;
+    gap: 4em;
+    align-items: center;
+    justify-content: center;
+    padding: 2em 0;
+    width: 100%;
+}
+
+.planet-section {
+    text-align: center;
+}
+
+.planet-section img {
+    width: 200px;
+    height: auto;
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+.planet-section p {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 0.5em;
+    color: #ffffff;
+}
 
 /* Floating Animations */
 @keyframes float-earth {
