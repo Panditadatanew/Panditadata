@@ -129,20 +129,42 @@ footer {
     .nav-links { display: none; }
     .hamburger-menu { display: block; }
     .cards { flex-direction: column; }
+    .planet-section img { width: 180px; }
 }
 
-/* Planet Animation */
-.planet img {
-    width: 80%;
-    max-width: 400px;
-    animation: float 6s ease-in-out infinite alternate;
+/* Planet Sections */
+.planet-section {
+    text-align: center;
+    margin: 3em 0;
 }
 
-@keyframes float {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-10px);
-    }
+.planet-section img {
+    width: 250px;
+    height: auto;
+    animation: float 4s ease-in-out infinite alternate;
 }
+
+.earth img {
+    animation: float-earth 4s ease-in-out infinite alternate;
+}
+
+.mars img {
+    animation: float-mars 4s ease-in-out infinite alternate;
+}
+
+.planet-section p {
+    font-size: 1.3em;
+    margin-top: 0.5em;
+}
+
+/* Floating Animations */
+@keyframes float-earth {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-10px); }
+}
+
+@keyframes float-mars {
+    from { transform: translateY(0px); }
+    to { transform: translateY(15px); }
+}
+
