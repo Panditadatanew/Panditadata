@@ -131,3 +131,18 @@ footer {
     .cards { flex-direction: column; }
 }
 
+/* Planet Animation */
+.planet img {
+    width: 80%;
+    max-width: 400px;
+    animation: float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-10px);
+    }
+}
