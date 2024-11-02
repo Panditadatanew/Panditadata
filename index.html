@@ -3,65 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PanditaData - AI Geospatial Solutions</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>PanditaData - AI Geospatial OPEN Solutions</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #0a1128;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+        .main-title {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 48px;
+            color: #1e90ff;
+        }
+        .planet-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 50px 0;
+        }
+        .planet {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-size: cover;
+            animation: rotate 20s linear infinite;
+            cursor: pointer;
+        }
+        .earth {
+            background-image: url('earth.jpg'); /* Replace with actual image URL */
+            box-shadow: 0 0 30px rgba(30, 144, 255, 0.6);
+        }
+        .mars {
+            background-image: url('mars.jpg'); /* Replace with actual image URL */
+            box-shadow: 0 0 30px rgba(220, 20, 60, 0.6);
+            animation-duration: 30s;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card h4 {
+            color: #1e90ff;
+            margin-bottom: 15px;
+        }
+        footer {
+            background-color: #0a1128;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">PanditaData</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products & Solutions</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
+        <h1>PanditaData</h1>
+        <nav>
+            <a href="#geospatial-solutions">Geospatial OPEN Solutions</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#digital-mapping">Digital Mapping</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>PanditaData: AI-Powered Geospatial Solutions for Earth and Mars</h1>
-        <p>Explore, Analyze, and Discover New Frontiers</p>
-        <a href="#solutions" class="cta-button">Explore Our Solutions</a>
+    <section class="main-title">
+        <h2>AI Geospatial OPEN Solutions</h2>
     </section>
 
-    <!-- Planet Sections -->
-    <div id="solutions" class="planets-container">
-        <!-- Earth Section with Toggle Link -->
-        <section class="planet-section">
-            <img src="assets/images/Earth.webp"" alt="Earth" />
-            <p><a href="#" onclick="toggleSolutions('earthSolutions')">Explore Earth Solutions</a></p>
-            <div id="earthSolutions" class="solutions-content" style="display: none;">
-                <h2>Earth Solutions</h2>
-                <ul>
-                    <li><strong>Natural Disaster Management</strong>: Track and predict natural disasters to optimize emergency response.</li>
-                    <li><strong>Climate Monitoring</strong>: Monitor sea levels, glacial melting, and atmospheric changes.</li>
-                    <li><strong>Urban Development & Smart Cities</strong>: Optimize city infrastructure, traffic management, and energy efficiency.</li>
-                    <li><strong>Agricultural Intelligence</strong>: Improve crop management and water usage with satellite data.</li>
-                    <li><strong>Conservation & Wildlife Tracking</strong>: Track endangered species and map habitat changes to safeguard biodiversity.</li>
-                </ul>
-            </div>
-        </section>
+    <section class="planet-section">
+        <div class="planet earth" onclick="window.location.href='#earth-page'"></div>
+        <div class="planet mars" onclick="window.location.href='#mars-page'"></div>
+    </section>
 
-        <!-- Mars Section with Toggle Link -->
-        <section class="planet-section">
-            <img src="assets/images/Mars.webp" alt="Mars" />
-            <p><a href="#" onclick="toggleSolutions('marsSolutions')">Discover Mars Solutions</a></p>
-            <div id="marsSolutions" class="solutions-content" style="display: none;">
-                <h2>Mars Solutions</h2>
-                <ul>
-                    <li><strong>Martian Terrain Analysis</strong>: Identify potential landing sites and resource locations.</li>
-                    <li><strong>Habitat & Infrastructure Planning</strong>: Plan habitats and research stations based on resource availability.</li>
-                    <li><strong>Climate & Environmental Monitoring</strong>: Monitor Martian dust storms and seasonal changes for mission safety.</li>
-                    <li><strong>Rover Navigation & Pathfinding</strong>: Use AI for autonomous pathfinding on Martian terrain.</li>
-                    <li><strong>Resource Extraction & Processing</strong>: Identify and manage resources for sustainable exploration.</li>
-                </ul>
+    <!-- Earth Page -->
+    <section id="earth-page">
+        <h3>Earth: Solutions</h3>
+        <div class="card-container">
+            <div class="card">
+                <h4>Natural Disaster Prediction & Response</h4>
+                <p>Real-time monitoring and predictive analytics for floods, hurricanes, earthquakes, and fires. AI optimizes response routes and resource allocation.</p>
             </div>
-        </section>
-    </div>
+            <div class="card">
+                <h4>Climate Change Monitoring</h4>
+                <p>AI models track changes in climate indicators like deforestation, glacial retreat, sea levels, and pollution, providing predictive models on impacts.</p>
+            </div>
+            <div class="card">
+                <h4>Urban Planning & Smart Cities</h4>
+                <p>Optimize city layouts, traffic, pollution control, and public transport with AI-driven simulations for sustainable urban development.</p>
+            </div>
+            <div class="card">
+                <h4>Agricultural Optimization</h4>
+                <p>Precision agriculture using satellite data for crop health, yield prediction, and water/fertilizer management. Real-time pest tracking included.</p>
+            </div>
+            <div class="card">
+                <h4>Conservation & Wildlife Monitoring</h4>
+                <p>AI-powered detection and tracking of endangered species and habitat changes for conservation efforts.</p>
+            </div>
+            <div class="card">
+                <h4>Energy & Resource Management</h4>
+                <p>Optimize sites for renewable energy and use AI for mineral exploration and predictive maintenance of infrastructure.</p>
+            </div>
+        </div>
+    </section>
 
-    <script src="assets/js/scripts.js"></script>
+    <!-- Mars Page -->
+    <section id="mars-page">
+        <h3>Mars: Solutions</h3>
+        <div class="card-container">
+            <div class="card">
+                <h4>Martian Terrain Analysis</h4>
+                <p>Mapping and analyzing the surface for potential landing sites, habitation, and exploration paths. Identify resources like water ice and minerals.</p>
+            </div>
+            <div class="card">
+                <h4>Habitat & Infrastructure Planning</h4>
+                <p>AI-powered planning for constructing habitats and research stations. Optimize energy generation and resource accessibility.</p>
+            </div>
+            <div class="card">
+                <h4>Climate and Environmental Monitoring</h4>
+                <p>Track dust storms, atmospheric conditions, and seasonal changes for safe exploration and mission planning.</p>
+            </div>
+            <div class="card">
+                <h4>Rover and Exploration Pathfinding</h4>
+                <p>Autonomous AI systems for safe and efficient route navigation for rovers, adaptable to changing conditions.</p>
+            </div>
+            <div class="card">
+                <h4>Resource Extraction and Processing</h4>
+                <p>Identify and manage resources for in-situ utilization (ISRU) and optimize the extraction of water and minerals.</p>
+            </div>
+            <div class="card">
+                <h4>Virtual Reality Simulation</h4>
+                <p>Create VR environments of Mars for mission planning and training with high-resolution geospatial data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PanditaData. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Add JavaScript for additional interactions or dynamic effects here
+    </script>
 </body>
 </html>
