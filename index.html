@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PanditaData - AI Geospatial OPEN Solutions</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
             color: #333;
+            scroll-behavior: smooth;
         }
         header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 20px;
             background-color: #0a1128;
             color: white;
@@ -27,6 +29,10 @@
             text-decoration: none;
             color: white;
             font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #1e90ff;
         }
         .main-title {
             text-align: center;
@@ -39,14 +45,19 @@
             justify-content: space-around;
             align-items: center;
             margin: 50px 0;
+            position: relative;
         }
         .planet {
             width: 300px;
             height: 300px;
             border-radius: 50%;
             background-size: cover;
-            animation: rotate 20s linear infinite;
             cursor: pointer;
+            transition: transform 0.5s;
+            animation: rotate 20s linear infinite, floatUpDown 4s ease-in-out infinite;
+        }
+        .planet:hover {
+            transform: scale(1.1);
         }
         .earth {
             background-image: url('earth.jpg'); /* Replace with actual image URL */
@@ -55,7 +66,7 @@
         .mars {
             background-image: url('mars.jpg'); /* Replace with actual image URL */
             box-shadow: 0 0 30px rgba(220, 20, 60, 0.6);
-            animation-duration: 30s;
+            animation-duration: 30s; /* Mars rotates slower */
         }
         @keyframes rotate {
             from {
@@ -63,6 +74,14 @@
             }
             to {
                 transform: rotate(360deg);
+            }
+        }
+        @keyframes floatUpDown {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
             }
         }
         .card-container {
@@ -77,11 +96,20 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             transition: transform 0.3s, box-shadow 0.3s;
+            animation: cardFloatUpDown 5s ease-in-out infinite;
             cursor: pointer;
         }
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes cardFloatUpDown {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
         }
         .card h4 {
             color: #1e90ff;
@@ -112,8 +140,8 @@
     </section>
 
     <section class="planet-section">
-        <div class="planet earth" onclick="window.location.href='#earth-page'"></div>
-        <div class="planet mars" onclick="window.location.href='#mars-page'"></div>
+        <div class="planet earth" onclick="navigateToSection('earth-page')"></div>
+        <div class="planet mars" onclick="navigateToSection('mars-page')"></div>
     </section>
 
     <!-- Earth Page -->
@@ -184,7 +212,11 @@
     </footer>
 
     <script>
-        // Add JavaScript for additional interactions or dynamic effects here
+        function navigateToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Additional JavaScript for interactions can be added here
     </script>
 </body>
 </html>
