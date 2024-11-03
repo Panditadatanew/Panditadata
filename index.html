@@ -59,6 +59,7 @@
             overflow: hidden; /* Ensures content fits within viewport */
         }
        /* Animated Stars */
+           /* Enhanced Moving Star Field */
             .landing::before {
                 content: "";
                 position: absolute;
@@ -66,19 +67,19 @@
                 left: -50%;
                 width: 200%;
                 height: 200%;
-                background: radial-gradient(white, transparent 1px) 50% 50%,
+                background: radial-gradient(white, transparent 1px) 0px 0px,
                             radial-gradient(white, transparent 1px) 20px 20px,
                             radial-gradient(white, transparent 1px) 80px 80px,
-                            radial-gradient(white, transparent 1px) 190px 190px;
-                background-size: 5px 5px,10px, 10px, 15px 15px, 20px 20px, 25px 25px;
-                animation: starsMove 40s linear infinite; /* Animation for moving stars */
-                opacity: 0.2;
+                            radial-gradient(white, transparent 1px) 120px 120px;
+                background-size: 3px 3px, 5px 5px, 10px 10px, 15px 15px;
+                animation: starfieldMove 30s linear infinite;
+                opacity: 0.3;
                 z-index: -1;
             }
-                        /* Shooting Stars and Meteors */
-                @keyframes starsMove {
+                            /* Animation for Starfield */
+                @keyframes starfieldMove {
                     from { transform: translateY(0) translateX(0); }
-                    to { transform: translateY(-500px) translateX(-500px); }
+                    to { transform: translateY(-1000px) translateX(-1000px); }
                 }
                 
                 @keyframes meteor {
@@ -94,7 +95,7 @@
                     width: 2px;
                     height: 100px;
                     background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-                    opacity: 0.1;
+                    opacity: 0.3;
                     animation: meteor 2s linear infinite;
                 }
         .landing-text {
@@ -147,6 +148,23 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Orbiting Meteors */
+            .orbiting-meteor {
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                animation: orbit 6s linear infinite;
+            }
+            
+            /* Elliptical Orbit Animation for Meteors */
+            @keyframes orbit {
+                0% { transform: rotate(0deg) translateX(100px) translateY(50px); }
+                50% { transform: rotate(180deg) translateX(100px) translateY(50px); }
+                100% { transform: rotate(360deg) translateX(100px) translateY(50px); }
+            }
 
         /* Card and section styles */
         .section {
