@@ -433,41 +433,7 @@
         function navigateTo(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
         }
-     function smoothScrollTo(element) {
-        const target = document.getElementById(element);
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        const duration = 1500; // Adjust this duration for slower or faster scroll (1500ms for smooth effect)
-        let start = null;
-
-        function animation(currentTime) {
-            if (start === null) start = currentTime;
-            const timeElapsed = currentTime - start;
-            const run = ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        }
-
-        // Easing function for smooth, soft scroll
-        function ease(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t * t * t * t + b;
-            t -= 2;
-            return c / 2 * (t * t * t * t * t + 2) + b;
-        }
-
-        requestAnimationFrame(animation);
-    }
-
-    // Add event listeners to navigation links
-    document.querySelectorAll('.navbar a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            smoothScrollTo(targetId);
-        });
-    });
+   
     </script>
 </body>
 </html>
