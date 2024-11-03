@@ -73,7 +73,7 @@
                             radial-gradient(white, transparent 1px) 120px 120px;
                 background-size: 3px 3px, 5px 5px, 10px 10px, 15px 15px;
                 animation: starfieldMove 30s linear infinite;
-                opacity: 0.3;
+                opacity: 0.2;
                 z-index: -1;
             }
                             /* Animation for Starfield */
@@ -83,9 +83,9 @@
                 }
                 
                 @keyframes meteor {
-                    0% { opacity: 0; transform: translate(0, 0) rotate(45deg) scale(0); }
+                    0% { opacity: 0; transform: translate(-200px, -200px) rotate(45deg) scale(0); }
                     20% { opacity: 1; }
-                    100% { opacity: 0; transform: translate(300px, 300px) rotate(45deg) scale(1); }
+                    100% { opacity: 0; transform: translate(500px, 500px) rotate(45deg) scale(1); }
                 }
                 
                 /* Meteor Element */
@@ -148,23 +148,9 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* Orbiting Meteors */
-            .orbiting-meteor {
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                background-color: rgba(255, 255, 255, 0.8);
-                border-radius: 50%;
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-                animation: orbit 6s linear infinite;
-            }
+
             
-            /* Elliptical Orbit Animation for Meteors */
-            @keyframes orbit {
-                0% { transform: rotate(0deg) translateX(100px) translateY(50px); }
-                50% { transform: rotate(180deg) translateX(100px) translateY(50px); }
-                100% { transform: rotate(360deg) translateX(100px) translateY(50px); }
-            }
+   
 
         /* Card and section styles */
         .section {
