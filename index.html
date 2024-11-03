@@ -44,7 +44,8 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            margin: 50px 0;
+            margin: 100px 0;
+            padding-bottom: 300px; /* Extra space to push solutions lower */
             position: relative;
         }
         .planet {
@@ -83,6 +84,18 @@
             50% {
                 transform: translateY(-15px);
             }
+        }
+        .explore-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .explore-link:hover {
+            text-decoration: underline;
         }
         .card-container {
             display: grid;
@@ -140,8 +153,14 @@
     </section>
 
     <section class="planet-section">
-        <div class="planet earth" onclick="navigateToSection('earth-page')"></div>
-        <div class="planet mars" onclick="navigateToSection('mars-page')"></div>
+        <div>
+            <div class="planet earth"></div>
+            <a href="#earth-page" class="explore-link">Explore Earth Solutions</a>
+        </div>
+        <div>
+            <div class="planet mars"></div>
+            <a href="#mars-page" class="explore-link">Discover Mars Solutions</a>
+        </div>
     </section>
 
     <!-- Earth Page -->
@@ -216,7 +235,7 @@
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Additional JavaScript for interactions can be added here
+        // Additional JavaScript for interactions can go here
     </script>
 </body>
 </html>
