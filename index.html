@@ -3,239 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PanditaData - AI Geospatial OPEN Solutions</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>PanditaData: AI Geospatial OPEN Solutions</title>
     <style>
-        body {
+        /* Basic reset */
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            scroll-behavior: smooth;
+            padding: 0;
+            box-sizing: border-box;
         }
-        header {
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation bar */
+        .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 20px;
-            background-color: #0a1128;
-            color: white;
+            background: #121212;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 10;
         }
-        nav a {
-            margin: 0 15px;
+
+        .navbar a {
+            color: #00aaff;
             text-decoration: none;
-            color: white;
-            font-size: 18px;
+            padding: 10px 15px;
             transition: color 0.3s;
         }
-        nav a:hover {
-            color: #1e90ff;
+
+        .navbar a:hover {
+            color: #ff4500;
         }
-        .main-title {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 48px;
-            color: #1e90ff;
-        }
-        .planet-section {
+
+        /* Landing page with rotating planets */
+        .landing {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            margin: 100px 0;
-            padding-bottom: 300px; /* Extra space to push solutions lower */
+            height: 100vh;
+            background: linear-gradient(120deg, #001f3f, #00284f);
+            color: white;
             position: relative;
         }
+
         .planet {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
+            width: 150px;
+            height: 150px;
             background-size: cover;
-            cursor: pointer;
-            transition: transform 0.5s;
-            animation: rotate 20s linear infinite, floatUpDown 4s ease-in-out infinite;
+            border-radius: 50%;
+            animation: rotate 10s infinite linear;
+            margin: 20px;
         }
-        .planet:hover {
-            transform: scale(1.1);
-        }
+
         .earth {
-            background-image: url('earth.jpg'); /* Replace with actual image URL */
-            box-shadow: 0 0 30px rgba(30, 144, 255, 0.6);
+            background-image: url('earth.jpg'); /* Add Earth image path */
         }
+
         .mars {
-            background-image: url('mars.jpg'); /* Replace with actual image URL */
-            box-shadow: 0 0 30px rgba(220, 20, 60, 0.6);
-            animation-duration: 30s; /* Mars rotates slower */
+            background-image: url('mars.jpg'); /* Add Mars image path */
+            animation-duration: 15s;
         }
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        @keyframes floatUpDown {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        .explore-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 20px;
-            color: #1e90ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .explore-link:hover {
-            text-decoration: underline;
-        }
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 40px;
-        }
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: cardFloatUpDown 5s ease-in-out infinite;
+
+        .planet:hover {
             cursor: pointer;
+            transform: scale(1.1);
+            transition: transform 0.3s;
         }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        @keyframes cardFloatUpDown {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+
+        /* Card and section styles */
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+            background: #1a1a1a;
         }
-        .card h4 {
-            color: #1e90ff;
-            margin-bottom: 15px;
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-        footer {
-            background-color: #0a1128;
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background: #2b2b2b;
+            width: 250px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #00aaff;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 1em;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>PanditaData</h1>
-        <nav>
-            <a href="#geospatial-solutions">Geospatial OPEN Solutions</a>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div><a href="#landing">AI Geospatial OPEN Solutions</a></div>
+        <div>
             <a href="#about">About</a>
-            <a href="#contact">Contact</a>
             <a href="#digital-mapping">Digital Mapping</a>
-        </nav>
-    </header>
-
-    <section class="main-title">
-        <h2>AI Geospatial OPEN Solutions</h2>
-    </section>
-
-    <section class="planet-section">
-        <div>
-            <div class="planet earth"></div>
-            <a href="#earth-page" class="explore-link">Explore Earth Solutions</a>
+            <a href="#contact">Contact</a>
         </div>
-        <div>
-            <div class="planet mars"></div>
-            <a href="#mars-page" class="explore-link">Discover Mars Solutions</a>
-        </div>
-    </section>
+    </div>
 
-    <!-- Earth Page -->
-    <section id="earth-page">
-        <h3>Earth: Solutions</h3>
+    <!-- Landing Page -->
+    <div class="landing" id="landing">
+        <div onclick="navigateTo('earth-section')" class="planet earth"></div>
+        <div class="landing-text">
+            <h1>AI Geospatial OPEN Solutions</h1>
+            <p>Click a planet to explore</p>
+        </div>
+        <div onclick="navigateTo('mars-section')" class="planet mars"></div>
+    </div>
+
+    <!-- Earth Section -->
+    <section class="section" id="earth-section">
+        <h2 class="section-title">Earth: AI Geospatial Solutions</h2>
         <div class="card-container">
             <div class="card">
-                <h4>Natural Disaster Prediction & Response</h4>
-                <p>Real-time monitoring and predictive analytics for floods, hurricanes, earthquakes, and fires. AI optimizes response routes and resource allocation.</p>
+                <div class="card-icon">🌪️</div>
+                <h3 class="card-title">Natural Disaster Prediction</h3>
+                <p class="card-description">Real-time monitoring for floods, hurricanes, earthquakes, and fires.</p>
             </div>
             <div class="card">
-                <h4>Climate Change Monitoring</h4>
-                <p>AI models track changes in climate indicators like deforestation, glacial retreat, sea levels, and pollution, providing predictive models on impacts.</p>
+                <div class="card-icon">🌍</div>
+                <h3 class="card-title">Climate Change Monitoring</h3>
+                <p class="card-description">Track changes in deforestation, sea levels, and pollution impacts.</p>
             </div>
             <div class="card">
-                <h4>Urban Planning & Smart Cities</h4>
-                <p>Optimize city layouts, traffic, pollution control, and public transport with AI-driven simulations for sustainable urban development.</p>
+                <div class="card-icon">🏙️</div>
+                <h3 class="card-title">Urban Planning</h3>
+                <p class="card-description">Optimize city layouts, traffic management, and public transport.</p>
             </div>
-            <div class="card">
-                <h4>Agricultural Optimization</h4>
-                <p>Precision agriculture using satellite data for crop health, yield prediction, and water/fertilizer management. Real-time pest tracking included.</p>
-            </div>
-            <div class="card">
-                <h4>Conservation & Wildlife Monitoring</h4>
-                <p>AI-powered detection and tracking of endangered species and habitat changes for conservation efforts.</p>
-            </div>
-            <div class="card">
-                <h4>Energy & Resource Management</h4>
-                <p>Optimize sites for renewable energy and use AI for mineral exploration and predictive maintenance of infrastructure.</p>
-            </div>
+            <!-- Add more Earth-focused cards as needed -->
         </div>
     </section>
 
-    <!-- Mars Page -->
-    <section id="mars-page">
-        <h3>Mars: Solutions</h3>
+    <!-- Mars Section -->
+    <section class="section" id="mars-section">
+        <h2 class="section-title">Mars: AI Geospatial Solutions</h2>
         <div class="card-container">
             <div class="card">
-                <h4>Martian Terrain Analysis</h4>
-                <p>Mapping and analyzing the surface for potential landing sites, habitation, and exploration paths. Identify resources like water ice and minerals.</p>
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Terrain Analysis</h3>
+                <p class="card-description">Mapping Martian surface for landing sites and exploration paths.</p>
             </div>
             <div class="card">
-                <h4>Habitat & Infrastructure Planning</h4>
-                <p>AI-powered planning for constructing habitats and research stations. Optimize energy generation and resource accessibility.</p>
+                <div class="card-icon">🏠</div>
+                <h3 class="card-title">Habitat Planning</h3>
+                <p class="card-description">Plan habitats, energy sites, and research stations for Mars.</p>
             </div>
             <div class="card">
-                <h4>Climate and Environmental Monitoring</h4>
-                <p>Track dust storms, atmospheric conditions, and seasonal changes for safe exploration and mission planning.</p>
+                <div class="card-icon">🌬️</div>
+                <h3 class="card-title">Climate Monitoring</h3>
+                <p class="card-description">Monitor dust storms and weather for mission safety.</p>
             </div>
-            <div class="card">
-                <h4>Rover and Exploration Pathfinding</h4>
-                <p>Autonomous AI systems for safe and efficient route navigation for rovers, adaptable to changing conditions.</p>
-            </div>
-            <div class="card">
-                <h4>Resource Extraction and Processing</h4>
-                <p>Identify and manage resources for in-situ utilization (ISRU) and optimize the extraction of water and minerals.</p>
-            </div>
-            <div class="card">
-                <h4>Virtual Reality Simulation</h4>
-                <p>Create VR environments of Mars for mission planning and training with high-resolution geospatial data.</p>
-            </div>
+            <!-- Add more Mars-focused cards as needed -->
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 PanditaData. All rights reserved.</p>
-    </footer>
-
+    <!-- JavaScript for navigation -->
     <script>
-        function navigateToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        function navigateTo(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
         }
-
-        // Additional JavaScript for interactions can go here
     </script>
 </body>
 </html>
