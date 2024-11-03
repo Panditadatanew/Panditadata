@@ -67,11 +67,11 @@
                 width: 200%;
                 height: 200%;
                 background: radial-gradient(white, transparent 1px) 50% 50%,
-                            radial-gradient(white, transparent 1px) 60px 60px,
-                            radial-gradient(white, transparent 1px) 30px 30px,
-                            radial-gradient(white, transparent 1px) 90px 90px;
-                background-size: 10px 10px, 15px 15px, 20px 20px, 25px 25px;
-                animation: starsMove 60s linear infinite; /* Animation for moving stars */
+                            radial-gradient(white, transparent 1px) 20px 20px,
+                            radial-gradient(white, transparent 1px) 80px 80px,
+                            radial-gradient(white, transparent 1px) 190px 190px;
+                background-size: 5px 5px,10px, 10px, 15px 15px, 20px 20px, 25px 25px;
+                animation: starsMove 40s linear infinite; /* Animation for moving stars */
                 opacity: 0.2;
                 z-index: -1;
             }
@@ -83,20 +83,19 @@
                 
                 @keyframes meteor {
                     0% { opacity: 0; transform: translate(0, 0) rotate(45deg) scale(0); }
-                    50% { opacity: 1; }
-                    100% { opacity: 0; transform: translate(200px, 200px) rotate(45deg) scale(1); }
+                    20% { opacity: 1; }
+                    100% { opacity: 0; transform: translate(300px, 300px) rotate(45deg) scale(1); }
                 }
                 
                 /* Meteor Element */
                 .meteor {
                     position: absolute;
-                    top: 0;
-                    left: 0;
+                   
                     width: 2px;
                     height: 100px;
                     background: linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-                    opacity: 0;
-                    animation: meteor 3s linear infinite;
+                    opacity: 0.1;
+                    animation: meteor 2s linear infinite;
                 }
         .landing-text {
             position: absolute;
