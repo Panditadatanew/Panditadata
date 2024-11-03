@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PanditaData: AI Geospatial OPEN Solutions</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM6S2xkKp3A0RnFNH3s4ZC3NnE9j8BO8Jzda0tM" crossorigin="anonymous">
     <style>
         /* Basic reset */
         * {
@@ -136,6 +137,67 @@
             margin: auto;
             line-height: 1.6;
         }
+          /* Interactive cards section */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: #2b2b2b;
+            width: 250px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: white;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 1em;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #121212;
+            color: #aaa;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #00aaff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ff4500;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -240,10 +302,44 @@
         </div>
     </section>
 
+    <!-- Interactive Cards Section -->
+    <section class="section" id="interactive-cards">
+        <h2 class="section-title">Explore Our Offerings</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3 class="card-title">Explore Our Maps</h3>
+                <p class="card-description">Discover our full range of Earth and Mars maps with interactive layers and insights tailored to your needs.</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Contact Us for Custom Solutions</h3>
+                <p class="card-description">Need a custom geospatial solution? Reach out to learn how PanditaData can tailor our expertise to your project.</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Personalize Your Map</h3>
+                <p class="card-description">Bring your vision to life with personalized maps. From city planning to Mars exploration, our team is here to help.</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Follow Our Journey</h3>
+                <p class="card-description">Stay updated on new maps, solutions, and insights through our social media channels and newsletter.</p>
+            </div>
+        </div>
+    </section>
+    
     <!-- Contact Section -->
     <section class="section" id="contact">
         <h2 class="section-title">Contact Us</h2>
-        <p>If you’re interested in learning more or working together, reach out to us at <a href="mailto:info@panditadata.com" style="color: #00aaff;">info@panditadata.com</a>.</p>
+        <p>PanditaData – Bridging Earth and Mars with AI-Powered Geospatial Solutions</p>
+        <p>Stay connected with us as we drive innovation in geospatial intelligence for two worlds. Follow us for the latest in AI, mapping, and exploration technology.</p>
+        <div>Contact: <a href="mailto:panditadata@gmail.com">panditadata@gmail.com</a> </div>
+        <div>Address: Spain, Earth</div>
+        <div class="social-icons">
+        <a href="https://www.linkedin.com" target="_blank">
+        <i class="fab fa-linkedin fa-2x" style="color: #0e76a8;"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank">
+        <i class="fab fa-twitter fa-2x" style="color: #1DA1F2;"></i>
+        </a>
+        </div>
     </section>
 
     <!-- JavaScript for navigation -->
