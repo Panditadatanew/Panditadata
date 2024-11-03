@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PanditaData: AI Geospatial OPEN Solutions</title>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM6S2xkKp3A0RnFNH3s4ZC3NnE9j8BO8Jzda0tM" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-fullscreen/dist/leaflet.fullscreen.css" />
+    <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
     <style>
         /* Basic reset */
         * {
@@ -52,7 +56,20 @@
             color: white;
             position: relative;
         }
+        .landing-text {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+        }
 
+        .landing h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+         .planet-container {
+            display: flex;
+            gap: 40px;
+        }
         .planet {
             width: 150px;
             height: 150px;
@@ -60,6 +77,7 @@
             border-radius: 50%;
             animation: rotate 10s infinite linear;
             margin: 20px;
+            transition: transform 0.3s;
         }
 
         .earth {
@@ -77,7 +95,7 @@
             transition: transform 0.3s;
         }
 
-        @keyframes rotate {
+        @keyframes rotateVertical {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
@@ -87,18 +105,19 @@
             padding: 50px 20px;
             text-align: center;
             background: #1a1a1a;
+            margin-top: 20px
         }
+        .section-title { font-size: 2em; margin-bottom: 20px; color: #00aaff; }
+        .content-container { max-width: 800px; margin: auto; line-height: 1.6; }
 
-        .section-title {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+    
 
         .card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            padding: 20px;
         }
 
         .card {
@@ -198,6 +217,10 @@
         .social-icons a:hover {
             transform: scale(1.2);
         }
+        /* Enable smooth scrolling for the entire page */
+        html {
+        scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -205,7 +228,8 @@
     <div class="navbar">
         <div><a href="#landing">AI Geospatial OPEN Solutions</a></div>
         <div>
-            <a href="#about">About</a>
+            <a href="#about">About Us</a>
+            <a href="#interactive-cards"">Get Started</a>
             <a href="#digital-mapping">Digital Mapping</a>
             <a href="#contact">Contact</a>
         </div>
@@ -213,12 +237,14 @@
 
     <!-- Landing Page -->
     <div class="landing" id="landing">
-        <div onclick="navigateTo('earth-section')" class="planet earth"></div>
         <div class="landing-text">
             <h1>AI Geospatial OPEN Solutions</h1>
             <p>Click a planet to explore</p>
         </div>
-        <div onclick="navigateTo('mars-section')" class="planet mars"></div>
+        <div class="planet-container">
+            <div class="planet earth" onclick="navigateTo('earth-section')"></div>
+            <div class="planet mars" onclick="navigateTo('mars-section')"></div>
+        </div>
     </div>
 
     <!-- Earth Section -->
