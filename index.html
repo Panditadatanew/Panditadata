@@ -57,7 +57,7 @@
             z-index: 10;
         }
 
-        .navbar a {
+        .navbar-links a {
             color: #00aaff;
             text-decoration: none;
             padding: 10px 15px;
@@ -67,7 +67,31 @@
         .navbar a:hover {
             color: #ff4500;
         }
+/* Hamburger menu (only visible on mobile) */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
 
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #121212;
+    }
+
+    .navbar.active .nav-links {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        color: #00aaff;
+    }
+}
         /* Landing page with rotating planets */
         .landing {
             display: flex;
@@ -680,6 +704,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 sunPosition.y = window.innerHeight / 2;
             });
 });
+        
+function toggleMenu() {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('active');
+}
+
 </script>
     
 </body>
