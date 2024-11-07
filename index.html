@@ -343,10 +343,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
     <!-- Earth's Element for Orbiting the Sun -->
-    <div class="earth"></div>
+    <div class="earth" onclick="explorePlanet('earth')"></div>
 
     <!-- Mars' Element for Orbiting the Sun -->
-    <div class="mars"></div>
+    <div class="mars"  onclick="explorePlanet('mars')"></div>
 </div>
 
     <!-- Landing Text -->
@@ -554,6 +554,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             planets.forEach(updatePosition);
         }, 20); // Adjust interval speed for smoother animation
     });
+    function explorePlanet(planet) {
+        if (planet === 'earth') {
+            // Action for Earth - for example, scroll to a section or open a new page
+            alert("Exploring Earth!");
+            // Example: Scroll to an Earth section
+            // document.getElementById('earth-section').scrollIntoView({ behavior: 'smooth' });
+        } else if (planet === 'mars') {
+            // Action for Mars - for example, scroll to a section or open a new page
+            alert("Exploring Mars!");
+            // Example: Scroll to a Mars section
+            // document.getElementById('mars-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
     </script>
 </body>
 </html>
