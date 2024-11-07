@@ -139,7 +139,7 @@
         overflow: hidden;
     }
 
-  /* Sun at the Center */
+/* Sun at the Center */
 .sun {
     position: absolute;
     width: 80px;
@@ -157,11 +157,11 @@
     position: absolute;
     top: 30%; /* Align with Sun */
     left: 50%;
-    width: 600px;
-    height: 300px;
+    width: 700px;
+    height: 350px;
     border-radius: 50%;
     transform-origin: center;
-    animation: earthOrbit 20s linear infinite;
+    animation: orbitAroundSun 20s linear infinite;
 }
 
 /* Earth */
@@ -186,7 +186,7 @@
     height: 450px;
     border-radius: 50%;
     transform-origin: center;
-    animation: marsOrbit 30s linear infinite;
+    animation: orbitAroundSun 20s linear infinite;
 }
 
 /* Mars */
@@ -202,11 +202,13 @@
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
 }
 
-    /* Keyframes for Elliptical Orbits */
-    @keyframes earthOrbit {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+/* Keyframes for Orbiting the Sun at Same Speed */
+@keyframes orbitAroundSun {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+   
 
     @keyframes marsOrbit {
         0% { transform: rotate(0deg); }
@@ -374,21 +376,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
- <!-- Landing Page -->
+<!-- Landing Page -->
 <div class="landing" id="landing">
     <!-- Sun at the Center -->
     <div class="sun"></div>
 
-    <!-- Earth Orbiting the Sun -->
-    <div class="planet-container">
-        <div class="earth-orbit">
-            <div class="earth" onclick="navigateTo('earth-section')">
-                <!-- Mars Orbiting Earth -->
-                <div class="mars-orbit">
-                    <div class="mars" onclick="navigateTo('mars-section')"></div>
-                </div>
-            </div>
-        </div>
+    <!-- Earth's Orbit around the Sun -->
+    <div class="earth-orbit">
+        <div class="earth" onclick="navigateTo('earth-section')"></div>
+    </div>
+
+    <!-- Mars' Orbit around the Sun -->
+    <div class="mars-orbit">
+        <div class="mars" onclick="navigateTo('mars-section')"></div>
     </div>
 
     <!-- Landing Text -->
