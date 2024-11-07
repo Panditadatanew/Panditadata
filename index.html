@@ -673,8 +673,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             spacecraftIsTraveling = true; // Set traveling status
             launchSpacecraft(); // Start the journey to the destination (Mars or back to Earth)
         }
-    }, 20); // Adjust interval speed for smoother animation
-       
+    }, 30); // Adjust interval speed for smoother animation
+        // Adjust sun and orbit on window resize
+            window.addEventListener('resize', () => {
+                sunPosition.x = window.innerWidth / 2;
+                sunPosition.y = window.innerHeight / 2;
+            });
 });
 </script>
     
