@@ -553,88 +553,94 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Continuously create meteors
     setInterval(createMeteor, 1500);
 });
-       document.addEventListener("DOMContentLoaded", function() {
-            // Sun's position in the center
-            const sunPosition = { x: window.innerWidth / 2, y: window.innerHeight * 0.3 };
+  document.addEventListener("DOMContentLoaded", function() {
+    // Sun's position in the center
+    const sunPosition = { x: window.innerWidth / 2, y: window.innerHeight * 0.3 };
 
-            // Define planets with orbital parameters
-            const planets = [
-                {
-                    element: document.querySelector('.earth'),
-                    semiMajorAxis: 150,
-                    semiMinorAxis: 100,
-                    speed: 0.02,
-                    theta: 0
-                },
-                {
-                    element: document.querySelector('.mars'),
-                    semiMajorAxis: 250,
-                    semiMinorAxis: 180,
-                    speed: 0.015,
-                    theta: 0
-                }
-            ];
+    // Define planets with orbital parameters
+    const planets = [
+        {
+            element: document.querySelector('.earth'),
+            semiMajorAxis: 150,
+            semiMinorAxis: 100,
+            speed: 0.02,
+            theta: 0
+        },
+        {
+            element: document.querySelector('.mars'),
+            semiMajorAxis: 250,
+            semiMinorAxis: 180,
+            speed: 0.015,
+            theta: 0
+        }
+    ];
 
-            // Spacecraft element and parameters
-            const spacecraft = document.querySelector(".spacecraft");
-            spacecraft.hasLaunched = false;
-            // Update function for planet positions
-            function updatePosition(planet) {
-                planet.theta += planet.speed;
-                const x = sunPosition.x + planet.semiMajorAxis * Math.cos(planet.theta);
-                const y = sunPosition.y + planet.semiMinorAxis * Math.sin(planet.theta);
-                planet.element.style.left = `${x}px`;
-                planet.element.style.top = `${y}px`;
+    // Spacecraft element and parameters
+    const spacecraft = document.querySelector(".spacecraft");
+    let spacecraftIsTraveling = false; // Track spacecraft's travel status
+    let toMars = true; // Track direction: to Mars or back to Earth
 
-                // Store the position for spacecraft path calculation
-                planet.currentPosition = { x, y };
+    // Update function for planet positions
+    function updatePosition(planet) {
+        planet.theta += planet.speed;
+        const x = sunPosition.x + planet.semiMajorAxis * Math.cos(planet.theta);
+        const y = sunPosition.y + planet.semiMinorAxis * Math.sin(planet.theta);
+        planet.element.style.left = `${x}px`;
+        planet.element.style.top = `${y}px`;
+
+        // Store the position for spacecraft path calculation
+        planet.currentPosition = { x, y };
+    }
+
+    // Function to animate the spacecraft between Earth and Mars
+    function launchSpacecraft() {
+        const earth = planets[0];
+        const mars = planets[1];
+        const destination = toMars ? mars : earth;
+        const duration = 5000; // Duration of the spacecraft journey in ms
+        const startTime = Date.now();
+
+        function animateSpacecraft() {
+            const elapsedTime = Date.now() - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+
+            // Calculate spacecraft position along the line between Earth and Mars
+            const x = earth.currentPosition.x + progress * (destination.currentPosition.x - earth.currentPosition.x);
+            const y = earth.currentPosition.y + progress * (destination.currentPosition.y - earth.currentPosition.y);
+
+            spacecraft.style.left = `${x}px`;
+            spacecraft.style.top = `${y}px`;
+
+            // Continue the animation until the spacecraft reaches the destination
+            if (progress < 1) {
+                requestAnimationFrame(animateSpacecraft);
+            } else {
+                spacecraftIsTraveling = false; // Stop movement
+                toMars = !toMars; // Toggle direction for the next launch
             }
+        }
 
-            // Function to animate the spacecraft from Earth to Mars
-            function launchSpacecraft() {
-                const earth = planets[0];
-                const mars = planets[1];
-                const duration = 5000; // Duration of the spacecraft journey in ms
-                const startTime = Date.now();
+        // Start the spacecraft animation
+        animateSpacecraft();
+    }
 
-                function animateSpacecraft() {
-                    const elapsedTime = Date.now() - startTime;
-                    const progress = Math.min(elapsedTime / duration, 1);
+    // Update planet positions and check for closest approach
+    setInterval(() => {
+        planets.forEach(updatePosition);
 
-                    // Calculate spacecraft position along the line between Earth and Mars
-                    const x = earth.currentPosition.x + progress * (mars.currentPosition.x - earth.currentPosition.x);
-                    const y = earth.currentPosition.y + progress * (mars.currentPosition.y - earth.currentPosition.y);
+        // Calculate the distance between Earth and Mars
+        const distance = Math.sqrt(
+            Math.pow(planets[0].currentPosition.x - planets[1].currentPosition.x, 2) +
+            Math.pow(planets[0].currentPosition.y - planets[1].currentPosition.y, 2)
+        );
 
-                    spacecraft.style.left = `${x}px`;
-                    spacecraft.style.top = `${y}px`;
-
-                    // Continue the animation until the spacecraft reaches Mars
-                    if (progress < 1) {
-                        requestAnimationFrame(animateSpacecraft);
-                    }
-                }
-
-                // Start the spacecraft animation
-                animateSpacecraft();
-            }
-
-            // Update planet positions and check for closest approach
-            setInterval(() => {
-                planets.forEach(updatePosition);
-
-                // Calculate the distance between Earth and Mars
-                const distance = Math.sqrt(
-                    Math.pow(planets[0].currentPosition.x - planets[1].currentPosition.x, 2) +
-                    Math.pow(planets[0].currentPosition.y - planets[1].currentPosition.y, 2)
-                );
-
-                // Launch the spacecraft only when Earth and Mars are closest (distance threshold)
-                if (spacecraft && !spacecraft.hasLaunched) {
-                    spacecraft.hasLaunched = true;
-                    launchSpacecraft();
-                }
-            }, 20); // Adjust interval speed for smoother animation
-        });
+        // Launch the spacecraft only when Earth and Mars are closest, and it's not already traveling
+        if (distance < 300 && !spacecraftIsTraveling) {
+            spacecraftIsTraveling = true; // Set traveling status
+            launchSpacecraft(); // Start the journey to the destination (Mars or back to Earth)
+        }
+    }, 20); // Adjust interval speed for smoother animation
+});
 </script>
     
 </body>
