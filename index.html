@@ -584,7 +584,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const spacecraft = document.querySelector(".spacecraft");
     let spacecraftIsTraveling = false; // Track spacecraft's travel status
     let toMars = true; // Track direction: to Mars or back to Earth
-    let onMars = false;
+    
       
     // Update function for planet positions
     function updatePosition(planet) {
@@ -643,12 +643,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             } else {
                 spacecraftIsTraveling = false; // Stop movement
                 toMars = !toMars; // Toggle direction for the next launch
+                alert(toMars ? "Safe landing on Mars!" : "We are home!");
+                    
             }
         }
 
         // Start the spacecraft animation
         animateSpacecraft();
     }
+
+    // Responsive behavior on resize
+    window.addEventListener('resize', () => {
+                sunPosition.x = window.innerWidth / 2;
+                sunPosition.y = window.innerHeight / 2;
+    })
 
     // Update planet positions and check for closest approach
     setInterval(() => {
@@ -666,13 +674,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             launchSpacecraft(); // Start the journey to the destination (Mars or back to Earth)
         }
     }, 20); // Adjust interval speed for smoother animation
-         // Resize event to keep responsive orbits
-    window.addEventListener('resize', () => {
-        sunPosition.x = window.innerWidth / 2;
-        sunPosition.y = window.innerHeight * 0.3;
-        orbits.earthOrbit = { semiMajorAxis: window.innerWidth * 0.15, semiMinorAxis: window.innerHeight * 0.1 };
-        orbits.marsOrbit = { semiMajorAxis: window.innerWidth * 0.25, semiMinorAxis: window.innerHeight * 0.15 };
-    });
+       
 });
 </script>
     
