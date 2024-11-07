@@ -104,11 +104,7 @@
                     to { transform: translateY(-1000px) translateX(-1000px); }
                 }
                 
-                @keyframes meteor {
-                    0% { opacity: 0; transform: translate(-200px, -200px) rotate(45deg) scale(0); }
-                    20% { opacity: 1; }
-                    100% { opacity: 0; transform: translate(500px, 500px) rotate(45deg) scale(1); }
-                }
+               
                 
                 /* Meteor Element */
                 .meteor {
@@ -120,23 +116,28 @@
                     opacity: 0.3;
                     animation: meteor 2s linear infinite;
                 }
-        .landing-text {
-            position: absolute;
-            top: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .landing h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-      .planet-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
+                 @keyframes meteor {
+                            0% { opacity: 0; transform: translate(-200px, -200px) rotate(45deg) scale(0); }
+                            20% { opacity: 1; }
+                            100% { opacity: 0; transform: translate(500px, 500px) rotate(45deg) scale(1); }
+                        }
+                .landing-text {
+                    position: absolute;
+                    top: 20px;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+        
+                .landing h1 {
+                    font-size: 2.5em;
+                    margin-bottom: 10px;
+                }
+              .planet-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
 
 /* Sun at the Center */
 .sun {
@@ -356,7 +357,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div>
             <a href="#about">About Us</a>
             <a href="#interactive-cards"">Get Started</a>
-            <a href="#digital-mapping">Digital Mapping</a>
+            <a href="#https://panditadata.com">Digital Mapping</a>
             <a href="#contact">Contact</a>
         </div>
     </div>
@@ -524,6 +525,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- JavaScript for navigation -->
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const landing = document.querySelector(".landing");
+
+    // Generate multiple stars for background effect
+    for (let i = 0; i < 100; i++) {
+        let star = document.createElement("div");
+        star.className = "star " + (["small", "medium", "large"][Math.floor(Math.random() * 3)]);
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        landing.appendChild(star);
+    }
+
+    // Generate running meteor effect
+    function createMeteor() {
+        const meteor = document.createElement("div");
+        meteor.className = "meteor";
+        meteor.style.top = `${Math.random() * 100}%`;
+        meteor.style.left = `${Math.random() * 100}%`;
+        meteor.style.animationDelay = `${Math.random() * 5}s`; // Stagger animation timing
+        landing.appendChild(meteor);
+
+        // Remove meteor after animation
+        setTimeout(() => meteor.remove(), 2000);
+    }
+
+    // Continuously create meteors
+    setInterval(createMeteor, 1500);
+});
        document.addEventListener("DOMContentLoaded", function() {
             // Sun's position in the center
             const sunPosition = { x: window.innerWidth / 2, y: window.innerHeight * 0.3 };
