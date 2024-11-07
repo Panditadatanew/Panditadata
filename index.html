@@ -537,7 +537,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function navigateTo(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
         }
-   
+    // Create dynamic stars
+    document.addEventListener("DOMContentLoaded", function() {
+        const landing = document.querySelector(".landing");
+        
+        // Generate stars
+        for (let i = 0; i < 50; i++) {
+            let star = document.createElement("div");
+            star.className = "star " + (["small", "medium", "large"][Math.floor(Math.random() * 3)]);
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            landing.appendChild(star);
+        }
+    });
     </script>
 </body>
 </html>
