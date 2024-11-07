@@ -322,9 +322,28 @@
             background-color: white;
             border-radius: 50%;
             position: absolute;
+            transform: rotate(45deg); /* Adjust rotation as desired */
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
         }
-
+        /* Optional: Add wings and tail for spacecraft appearance */
+        .spacecraft::before, .spacecraft::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background-color: silver;
+            border-radius: 3px;
+        }
+        
+        .spacecraft::before {
+            left: -8px; /* Left wing */
+            top: 10px;
+        }
+        
+        .spacecraft::after {
+            right: -8px; /* Right wing */
+            top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -522,32 +541,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     //planets
-    document.addEventListener("DOMContentLoaded", function() {
-        const sun = document.querySelector('.sun');
+   <script>
+    // Smooth scroll to section on planet click
+    function navigateTo(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+    }
 
-        // Sun's position in the center
-        const sunPosition = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight * 0.3
-        };
+    // Create dynamic stars
+    document.addEventListener("DOMContentLoaded", function() {
+        const landing = document.querySelector(".landing");
+        
+        // Generate stars with different sizes
+        for (let i = 0; i < 50; i++) {
+            let star = document.createElement("div");
+            star.className = "star " + (["small", "medium", "large"][Math.floor(Math.random() * 3)]);
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            landing.appendChild(star);
+        }
+    });
+
+    // Define planetary orbits and spacecraft animation
+    document.addEventListener("DOMContentLoaded", function() {
+        const sunPosition = { x: window.innerWidth / 2, y: window.innerHeight * 0.3 };
 
         // Define planets with orbital parameters
         const planets = [
             {
                 element: document.querySelector('.earth'),
-                semiMajorAxis: 150,    // Semi-major axis length for Earth's orbit
-                semiMinorAxis: 100,    // Semi-minor axis length for Earth's orbit
-                speed: 0.02,           // Orbital speed
-                theta: 0               // Initial angle
+                semiMajorAxis: 150,
+                semiMinorAxis: 100,
+                speed: 0.02,
+                theta: 0
             },
             {
                 element: document.querySelector('.mars'),
-                semiMajorAxis: 250,    // Semi-major axis length for Mars' orbit
-                semiMinorAxis: 180,    // Semi-minor axis length for Mars' orbit
-                speed: 0.015,          // Orbital speed, slower than Earth
-                theta: 0               // Initial angle
+                semiMajorAxis: 250,
+                semiMinorAxis: 180,
+                speed: 0.015,
+                theta: 0
             }
         ];
+
+        // Create and style spacecraft element
+        const spacecraft = document.createElement("div");
+        spacecraft.className = "spacecraft";
+        document.querySelector(".landing").appendChild(spacecraft);
+        
+        // Styling spacecraft to have a unique shape
+        spacecraft.style.width = "10px";
+        spacecraft.style.height = "20px";
+        spacecraft.style.backgroundColor = "gray";
+        spacecraft.style.borderRadius = "3px";
+        spacecraft.style.position = "absolute";
+        spacecraft.style.boxShadow = "0 0 5px rgba(255, 255, 255, 0.8)";
+        spacecraft.style.transform = "rotate(45deg)"; // Tilt to simulate a spacecraft angle
 
         // Update function to calculate and set planet positions for elliptical orbits
         function updatePosition(planet) {
@@ -556,95 +604,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const y = sunPosition.y + planet.semiMinorAxis * Math.sin(planet.theta);
             planet.element.style.left = `${x}px`;
             planet.element.style.top = `${y}px`;
-        }
 
-        // Set interval to update positions of each planet
-        setInterval(() => {
-            planets.forEach(updatePosition);
-        }, 20); // Adjust interval speed for smoother animation
-    });
-    function explorePlanet(planet) {
-        if (planet === 'earth') {
-            // Action for Earth - for example, scroll to a section or open a new page
-            alert("Exploring Earth!");
-            // Example: Scroll to an Earth section
-            document.getElementById('earth-section').scrollIntoView({ behavior: 'smooth' });
-        } else if (planet === 'mars') {
-            // Action for Mars - for example, scroll to a section or open a new page
-            alert("Exploring Mars!");
-            // Example: Scroll to a Mars section
-            document.getElementById('mars-section').scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-  
-    document.addEventListener("DOMContentLoaded", function() {
-        const sun = document.querySelector('.sun');
-
-        // Sun's position in the center
-        const sunPosition = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight * 0.3
-        };
-
-        // Define planets with orbital parameters
-        const planets = [
-            {
-                element: document.querySelector('.earth'),
-                semiMajorAxis: 150,    // Semi-major axis length for Earth's orbit
-                semiMinorAxis: 100,    // Semi-minor axis length for Earth's orbit
-                speed: 0.02,           // Orbital speed
-                theta: 0               // Initial angle
-            },
-            {
-                element: document.querySelector('.mars'),
-                semiMajorAxis: 250,    // Semi-major axis length for Mars' orbit
-                semiMinorAxis: 180,    // Semi-minor axis length for Mars' orbit
-                speed: 0.015,          // Orbital speed, slower than Earth
-                theta: 0               // Initial angle
-            }
-        ];
-
-        // Spacecraft element and parameters
-        const spacecraft = document.createElement("div");
-        spacecraft.className = "spacecraft";
-        document.querySelector(".landing").appendChild(spacecraft);
-        spacecraft.style.width = "10px";
-        spacecraft.style.height = "10px";
-        spacecraft.style.backgroundColor = "white";
-        spacecraft.style.position = "absolute";
-        spacecraft.style.borderRadius = "50%";
-
-        // Update position for each planet in an elliptical orbit
-        function updatePosition(planet) {
-            planet.theta += planet.speed;
-            const x = sunPosition.x + planet.semiMajorAxis * Math.cos(planet.theta);
-            const y = sunPosition.y + planet.semiMinorAxis * Math.sin(planet.theta);
-            planet.element.style.left = `${x}px`;
-            planet.element.style.top = `${y}px`;
-
-            // Store the position for calculating the spacecraft path
+            // Store position for spacecraft calculation
             planet.currentPosition = { x, y };
         }
 
-        // Launch the spacecraft when Earth and Mars are at closest approach
+        // Function to animate the spacecraft from Earth to Mars
         function launchSpacecraft() {
             const earth = planets[0];
             const mars = planets[1];
-            const duration = 5000; // Time for the spacecraft to reach Mars (in milliseconds)
+            const duration = 5000; // Duration of the spacecraft journey in milliseconds
             const startTime = Date.now();
 
             function animateSpacecraft() {
                 const elapsedTime = Date.now() - startTime;
                 const progress = Math.min(elapsedTime / duration, 1);
 
-                // Calculate the spacecraft position along the curved path between Earth and Mars
+                // Calculate the spacecraft's position along the line between Earth and Mars
                 const x = earth.currentPosition.x + progress * (mars.currentPosition.x - earth.currentPosition.x);
                 const y = earth.currentPosition.y + progress * (mars.currentPosition.y - earth.currentPosition.y);
 
                 spacecraft.style.left = `${x}px`;
                 spacecraft.style.top = `${y}px`;
 
-                // Continue the animation until it reaches Mars
+                // Continue animation until the spacecraft reaches Mars
                 if (progress < 1) {
                     requestAnimationFrame(animateSpacecraft);
                 }
@@ -654,23 +637,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             animateSpacecraft();
         }
 
-        // Set interval to update the positions of Earth and Mars
+        // Set interval to update the positions of Earth and Mars, and check distance for closest approach
         setInterval(() => {
             planets.forEach(updatePosition);
 
-            // Check if Earth is at closest approach to Mars and launch spacecraft
+            // Check distance between Earth and Mars
             const distance = Math.sqrt(
                 Math.pow(planets[0].currentPosition.x - planets[1].currentPosition.x, 2) +
                 Math.pow(planets[0].currentPosition.y - planets[1].currentPosition.y, 2)
             );
 
-            if (distance < 300) { // Adjust distance threshold for closest approach
+            // Launch spacecraft if Earth and Mars are close enough
+            if (distance < 300) {
                 launchSpacecraft();
             }
         }, 20); // Adjust interval speed for smoother animation
     });
-</script>
 
+    // Explore planet function for navigation
+    function explorePlanet(planet) {
+        if (planet === 'earth') {
+            document.getElementById('earth-section').scrollIntoView({ behavior: 'smooth' });
+        } else if (planet === 'mars') {
+            document.getElementById('mars-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
     
 </body>
 </html>
