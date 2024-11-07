@@ -140,80 +140,37 @@
     }
 
 /* Sun at the Center */
+/* Sun at the Center */
 .sun {
     position: absolute;
     width: 80px;
     height: 80px;
     background: radial-gradient(circle, #ffdd57, #ff8c00);
     border-radius: 50%;
-    top: 30%; /* Higher position */
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 50px rgba(255, 200, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.5);
 }
 
-/* Earth's Orbit around the Sun */
-.earth-orbit {
-    position: absolute;
-    top: 30%; /* Align with Sun */
-    left: 50%;
-    width: 700px;
-    height: 350px;
-    border-radius: 50%;
-    transform-origin: center;
-    animation: orbitAroundSun 20s linear infinite;
-}
-
 /* Earth */
 .earth {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     background: url('https://images-assets.nasa.gov/image/PIA18033/PIA18033~large.jpg') no-repeat center/cover;
     border-radius: 50%;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
-}
-
-/* Mars' Orbit around the Sun */
-.mars-orbit {
-    position: absolute;
-    top: 30%; /* Align with Sun */
-    left: 50%;
-    width: 900px; /* Larger radius for Mars */
-    height: 450px;
-    border-radius: 50%;
-    transform-origin: center;
-    animation: orbitAroundSun 20s linear infinite;
 }
 
 /* Mars */
 .mars {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     background: url('https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg') no-repeat center/cover;
     border-radius: 50%;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
 }
 
-/* Keyframes for Orbiting the Sun at Same Speed */
-@keyframes orbitAroundSun {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-   
-
-    @keyframes marsOrbit {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
 
     /* Star Background */
     .star {
@@ -382,22 +339,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Sun at the Center -->
     <div class="sun"></div>
 
-    <!-- Earth's Orbit around the Sun -->
-    <div class="earth-orbit">
-        <div class="earth">
-            <div class="earth-rotation"></div>
-        </div>
-    </div>
+<div class="landing" id="landing">
+    <!-- Sun at the Center -->
+    <div class="sun"></div>
 
-    <!-- Mars' Orbit around the Sun -->
-    <div class="mars-orbit">
-        <div class="mars">
-            <div class="mars-rotation"></div>
-        </div>
-    </div>
+    <!-- Earth's Element for Orbiting the Sun -->
+    <div class="earth"></div>
 
-    <!-- Spacecraft Trajectory -->
-    <div class="spacecraft"></div>
+    <!-- Mars' Element for Orbiting the Sun -->
+    <div class="mars"></div>
 
     <!-- Landing Text -->
     <div class="landing-text">
@@ -560,6 +510,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             star.style.left = `${Math.random() * 100}%`;
             landing.appendChild(star);
         }
+    });
+
+    //planets
+         document.addEventListener("DOMContentLoaded", function() {
+        // Sun position in the center of the screen
+        const sun = document.querySelector('.sun');
+        const sunPosition = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight * 0.3
+        };
+
+        // Define planets with initial angles and distances from the Sun
+        const planets = [
+            {
+                element: document.querySelector('.earth'),
+                distance: 150,    // Distance from the Sun for Earth
+                speed: 0.02,      // Speed of rotation
+                theta: 0          // Initial angle
+            },
+            {
+                element: document.querySelector('.mars'),
+                distance: 250,    // Distance from the Sun for Mars
+                speed: 0.015,     // Slower speed for Mars
+                theta: 0          // Initial angle
+            }
+        ];
+
+        // Update function to calculate and set planet positions
+        function updatePosition(planet) {
+            planet.theta += planet.speed;
+            const x = sunPosition.x + planet.distance * Math.cos(planet.theta);
+            const y = sunPosition.y + planet.distance * Math.sin(planet.theta);
+            planet.element.style.left = `${x}px`;
+            planet.element.style.top = `${y}px`;
+        }
+
+        // Set interval to update positions of each planet
+        setInterval(() => {
+            planets.forEach(updatePosition);
+        }, 20); // Adjust interval speed for smoother animation
     });
     </script>
 </body>
