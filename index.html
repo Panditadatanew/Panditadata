@@ -142,12 +142,12 @@
 /* Sun at the Center */
 .sun {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 10vw;
+    height: 10vw;
     background: radial-gradient(circle, #ffdd57, #ff8c00);
     border-radius: 50%;
     top: 30%;
-    left: 50%;
+    left: 50vw;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 50px rgba(255, 200, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.5);
 }
@@ -159,15 +159,15 @@
 }
 
 .earth {
-    width: 40px;
-    height: 40px;
+    width: 5vw;
+    height: 5vw;
     background: url('https://images-assets.nasa.gov/image/PIA18033/PIA18033~large.jpg') no-repeat center/cover;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
 }
 
 .mars {
-    width: 30px;
-    height: 30px;
+    width: 4vw;
+    height: 4vw;
     background: url('https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg') no-repeat center/cover;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
 }
@@ -317,8 +317,8 @@
         scroll-behavior: smooth;
         }
         .spacecraft {
-            width: 10px;
-            height: 10px;
+            width: 2vw;
+            height: 2vw;
             background-color: white;
             border-radius: 50%;
             position: absolute;
@@ -556,7 +556,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   document.addEventListener("DOMContentLoaded", function() {
     // Sun's position in the center
     const sunPosition = { x: window.innerWidth / 2, y: window.innerHeight * 0.3 };
-
+ 
+      // Responsive orbit sizes
+    let orbits = {
+        earthOrbit: { semiMajorAxis: window.innerWidth * 0.15, semiMinorAxis: window.innerHeight * 0.1 },
+        marsOrbit: { semiMajorAxis: window.innerWidth * 0.25, semiMinorAxis: window.innerHeight * 0.15 }
+    };
     // Define planets with orbital parameters
     const planets = [
         {
@@ -579,7 +584,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const spacecraft = document.querySelector(".spacecraft");
     let spacecraftIsTraveling = false; // Track spacecraft's travel status
     let toMars = true; // Track direction: to Mars or back to Earth
-
+    let onMars = false;
+      
     // Update function for planet positions
     function updatePosition(planet) {
         planet.theta += planet.speed;
@@ -590,6 +596,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Store the position for spacecraft path calculation
         planet.currentPosition = { x, y };
+    }
+ // Landing message element
+    const landingMessage = document.createElement('div');
+    landingMessage.style.position = 'absolute';
+    landingMessage.style.padding = '10px';
+    landingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    landingMessage.style.color = 'white';
+    landingMessage.style.borderRadius = '8px';
+    landingMessage.style.display = 'none';
+    document.body.appendChild(landingMessage);
+
+    // Function to show landing message
+    function showLandingMessage(message, position) {
+        landingMessage.textContent = message;
+        landingMessage.style.left = `${position.x}px`;
+        landingMessage.style.top = `${position.y}px`;
+        landingMessage.style.display = 'block';
+        setTimeout(() => {
+            landingMessage.style.display = 'none';
+        }, 3000);
     }
 
     // Function to animate the spacecraft between Earth and Mars
@@ -640,6 +666,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             launchSpacecraft(); // Start the journey to the destination (Mars or back to Earth)
         }
     }, 20); // Adjust interval speed for smoother animation
+         // Resize event to keep responsive orbits
+    window.addEventListener('resize', () => {
+        sunPosition.x = window.innerWidth / 2;
+        sunPosition.y = window.innerHeight * 0.3;
+        orbits.earthOrbit = { semiMajorAxis: window.innerWidth * 0.15, semiMinorAxis: window.innerHeight * 0.1 };
+        orbits.marsOrbit = { semiMajorAxis: window.innerWidth * 0.25, semiMinorAxis: window.innerHeight * 0.15 };
+    });
 });
 </script>
     
