@@ -140,7 +140,6 @@
     }
 
 /* Sun at the Center */
-/* Sun at the Center */
 .sun {
     position: absolute;
     width: 80px;
@@ -154,21 +153,23 @@
 }
 
 /* Earth */
-.earth {
+.earth, .mars {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background: url('https://images-assets.nasa.gov/image/PIA18033/PIA18033~large.jpg') no-repeat center/cover;
     border-radius: 50%;
 }
 
-/* Mars */
+.earth {
+    width: 40px;
+    height: 40px;
+    background: url('https://images-assets.nasa.gov/image/PIA18033/PIA18033~large.jpg') no-repeat center/cover;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
+}
+
 .mars {
-    position: absolute;
     width: 30px;
     height: 30px;
     background: url('https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg') no-repeat center/cover;
-    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 255, 255, 0.5);
 }
 
 
@@ -339,15 +340,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Sun at the Center -->
     <div class="sun"></div>
 
-<div class="landing" id="landing">
-    <!-- Sun at the Center -->
-    <div class="sun"></div>
+
 
     <!-- Earth's Element for Orbiting the Sun -->
     <div class="earth"></div>
 
     <!-- Mars' Element for Orbiting the Sun -->
     <div class="mars"></div>
+</div>
 
     <!-- Landing Text -->
     <div class="landing-text">
@@ -513,35 +513,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     //planets
-         document.addEventListener("DOMContentLoaded", function() {
-        // Sun position in the center of the screen
+    document.addEventListener("DOMContentLoaded", function() {
         const sun = document.querySelector('.sun');
+
+        // Sun's position in the center
         const sunPosition = {
             x: window.innerWidth / 2,
             y: window.innerHeight * 0.3
         };
 
-        // Define planets with initial angles and distances from the Sun
+        // Define planets with orbital parameters
         const planets = [
             {
                 element: document.querySelector('.earth'),
-                distance: 150,    // Distance from the Sun for Earth
-                speed: 0.02,      // Speed of rotation
-                theta: 0          // Initial angle
+                semiMajorAxis: 150,    // Semi-major axis length for Earth's orbit
+                semiMinorAxis: 100,    // Semi-minor axis length for Earth's orbit
+                speed: 0.02,           // Orbital speed
+                theta: 0               // Initial angle
             },
             {
                 element: document.querySelector('.mars'),
-                distance: 250,    // Distance from the Sun for Mars
-                speed: 0.015,     // Slower speed for Mars
-                theta: 0          // Initial angle
+                semiMajorAxis: 250,    // Semi-major axis length for Mars' orbit
+                semiMinorAxis: 180,    // Semi-minor axis length for Mars' orbit
+                speed: 0.015,          // Orbital speed, slower than Earth
+                theta: 0               // Initial angle
             }
         ];
 
-        // Update function to calculate and set planet positions
+        // Update function to calculate and set planet positions for elliptical orbits
         function updatePosition(planet) {
             planet.theta += planet.speed;
-            const x = sunPosition.x + planet.distance * Math.cos(planet.theta);
-            const y = sunPosition.y + planet.distance * Math.sin(planet.theta);
+            const x = sunPosition.x + planet.semiMajorAxis * Math.cos(planet.theta);
+            const y = sunPosition.y + planet.semiMinorAxis * Math.sin(planet.theta);
             planet.element.style.left = `${x}px`;
             planet.element.style.top = `${y}px`;
         }
