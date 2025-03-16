@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/          # Block access to a hypothetical private folder (adjust as needed)
+Allow: /                     # Allow crawling of everything else
+Sitemap: https://marsoncall.com/sitemap.xml  # Point to your sitemap
