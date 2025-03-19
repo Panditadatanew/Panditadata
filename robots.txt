@@ -1,4 +1,2 @@
 User-agent: *
-Disallow: /google919434554c12d96a.html          # Block access to a hypothetical private folder (adjust as needed)
-Allow: /                     # Allow crawling of everything else
 Sitemap: https://marsoncall.com/sitemap.xml  # Point to your sitemap
